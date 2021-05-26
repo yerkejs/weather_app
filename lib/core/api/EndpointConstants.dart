@@ -10,9 +10,11 @@ abstract class EndpointConstants {
     Uri.parse("http://openweathermap.org/img/wn/${iconKey}@2x.png");
 }
 
+/// Types of the API services
 enum WeatherAPIServices { weather, forecast }
 
 extension WeatherAPIServicesExtension on WeatherAPIServices {
+  /// path of every API service
   String get pathKey {
     switch (this) {
       case WeatherAPIServices.weather:

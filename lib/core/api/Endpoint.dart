@@ -8,9 +8,12 @@ abstract class RequestEndpoint {
 }
 
 class WeatherEndpoints extends RequestEndpoint {
+
+  /// Query parameters for the HTTP/HTTPS requests
   @override
   final Map<String, String> queryParams;
   
+  /// Path of the quest 
   @override
   final String path;
 
@@ -20,6 +23,8 @@ class WeatherEndpoints extends RequestEndpoint {
   });
   
 
+  /// Endpoint for the request for getting weather data in specific location
+  /// [num latitude], [num longitude] - locations of  the user
   factory WeatherEndpoints.getCurrentWeather ({
     num latitude, 
     num longitude 
@@ -35,6 +40,9 @@ class WeatherEndpoints extends RequestEndpoint {
     );
   }
 
+
+  /// Endpoint for getting the forecasts for few days
+  /// [num lat, num lon] - geolocation of the user 
   factory WeatherEndpoints.getForecastsForDays ({
     num lat,
     num lon 
@@ -49,6 +57,9 @@ class WeatherEndpoints extends RequestEndpoint {
     }
   );
  
+
+  /// Endpoint for getting weather data in specific city
+  /// [String cityName] - Name of the city
   factory WeatherEndpoints.getCityWeather ({
     String cityName
   }) => WeatherEndpoints(
@@ -70,10 +81,3 @@ class WeatherEndpoints extends RequestEndpoint {
     );
   }
 }
-
-
-
-
-
-
-

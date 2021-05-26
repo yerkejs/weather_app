@@ -43,6 +43,7 @@ class WeatherEntityModel extends WeatherEntity {
 
   // MARK: - Factories
 
+  /// Decodes weather's JSON to [WeatherEntity]
   factory WeatherEntityModel.fromJson (Map<String, dynamic> json) {
     var weatherConditionsJson = ((json['weather'] ?? []) as List);
     
@@ -71,6 +72,7 @@ class WeatherEntityModel extends WeatherEntity {
     );
   }
 
+  /// Decodes Daily forcasts and returns as the [List<WeatherEntity>]
   static List<WeatherEntity> getWeatherForecasts (Map<String, dynamic> json) {
     final List<WeatherEntityModel> weathers = [];
     

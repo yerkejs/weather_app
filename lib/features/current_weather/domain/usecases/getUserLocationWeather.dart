@@ -6,6 +6,7 @@ import 'package:weather_yerke/core/models/location.dart';
 import 'package:weather_yerke/features/current_weather/domain/entities/weather_entity.dart';
 import 'package:weather_yerke/features/current_weather/domain/repositories/current_weather_repository.dart';
 
+/// UseCase for getting weather details for current location of the user
 class GetUserLocationWeather extends UseCase<WeatherEntity, Geolocation> {
   
   // MARK: - Props

@@ -4,6 +4,7 @@ enum InternetConnectionStatus { hasConnection, noConnection }
 
 class InternetConnectionState extends Equatable {
   
+  /// Status of the network connection
   final InternetConnectionStatus status;
   
   const InternetConnectionState({

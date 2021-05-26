@@ -4,6 +4,7 @@ import 'package:weather_yerke/core/constants/constants.dart';
 import 'package:weather_yerke/features/current_weather/domain/entities/weather_condition.dart';
 import 'package:weather_yerke/core/helpers/num_extension.dart';
 
+/// DTO Model for decoding [WeatherCondition] class
 class WeatherConditionModel extends WeatherCondition {
   final int id;
   final String name;
@@ -39,6 +40,7 @@ class WeatherConditionModel extends WeatherCondition {
     );
   }
 
+  /// Returns Path of the image in assets folder for the specific id of the weather condition
   static String getMainImageAssetPath (int id, {bool isDay = true}) {
     var dayNightMark = isDay ? "d" : "n";
     String idPath = "";

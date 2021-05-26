@@ -26,9 +26,12 @@ class CurrentWeatherCubit extends Cubit<CurrentWeatherState> {
 
   // MARK: - Public 
 
+  /// Getting weather details for the current location of the user
   Future<void> getWeatherByLocation (
     Geolocation usersLocation
   ) async {
+
+    /// Sending loading status
     emit(state.copyWith(status: CurrentWeatherLoadingStatus()));
 
     final response = await getUserLocationWeather(usersLocation);
@@ -45,9 +48,12 @@ class CurrentWeatherCubit extends Cubit<CurrentWeatherState> {
     );
   }
 
+  /// Getting weather details for the specific city
   Future<void> getWeatherByCity (
     String cityName
   ) async {
+
+    /// Sending loading status
     emit(state.copyWith(status: CurrentWeatherLoadingStatus()));
 
     final response = await getCityWeather(cityName);
