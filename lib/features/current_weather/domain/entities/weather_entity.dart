@@ -4,6 +4,7 @@ import 'package:weather_yerke/features/current_weather/domain/entities/weather_c
 
 import 'city.dart';
 
+/// Main Entity, holds all the business logic and data of the weather's details
 class WeatherEntity extends Equatable {
   final DateTime dateTime;
   final num temperature;

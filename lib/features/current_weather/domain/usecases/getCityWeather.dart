@@ -5,6 +5,7 @@ import 'package:weather_yerke/core/helpers/usecase_base.dart';
 import 'package:weather_yerke/features/current_weather/domain/entities/weather_entity.dart';
 import 'package:weather_yerke/features/current_weather/domain/repositories/current_weather_repository.dart';
 
+/// UseCase for getting weather details for the city
 class GetCityWeather extends UseCase<WeatherEntity, String> {
   
   // MARK: - Props

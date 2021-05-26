@@ -29,6 +29,8 @@ class CurrentWeatherRemoteDataSourceImpl extends CurrentWeatherRemoteDataSource 
   
   // MARK: - Public
 
+  /// Sending request to the server to retrieve weather in specific location 
+  /// [Geolocation location] - location of the user
   @override
   Future<WeatherEntity> getCurrentPositionsWeather(Geolocation location) async {
     http.Response response = await client.get(
@@ -46,6 +48,8 @@ class CurrentWeatherRemoteDataSourceImpl extends CurrentWeatherRemoteDataSource 
     }
   }
 
+  /// Sending request to the server to retrieve weather in specific city 
+  /// [String cityName] - city of the user
   @override
   Future<WeatherEntity> getCityWeather(String cityName) async {
     http.Response response = await client.get(WeatherEndpoints.getCityWeather(
@@ -60,6 +64,8 @@ class CurrentWeatherRemoteDataSourceImpl extends CurrentWeatherRemoteDataSource 
     }
   }
 
+  /// Sending request to get forecasts for few days
+  /// [double lat, double lon] - geopositions of the user
   @override
   Future<List<WeatherEntity>> getForecastForDays(double lat, double lon) async {
     http.Response response = await client.get(WeatherEndpoints.getForecastsForDays(

@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 
 part 'internet_connection_state.dart';
 
+/// Global Cubit responsible for notifying internet connection changes 
 class InternetConnectionCubit extends Cubit<InternetConnectionState> {
   
   final DataConnectionChecker dataConnectionChecker;

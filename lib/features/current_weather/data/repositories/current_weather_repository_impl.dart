@@ -24,7 +24,10 @@ class CurrentWeatherRepositoryImpl extends CurrentWeatherRepository {
   @override
   Future<Either<Failure, WeatherEntity>> getCityWeather(String cityName) async {
     try {
+      /// Getting main information about the weather in the city 
       final weatherDetails = await currentWeatherRemoteDataSource.getCityWeather(cityName);
+      
+      /// Getting forecasts for few days
       final weatherForecasts = await currentWeatherRemoteDataSource.getForecastForDays(
         weatherDetails.geolocation.latitude,
         weatherDetails.geolocation.longtitude
@@ -49,7 +52,10 @@ class CurrentWeatherRepositoryImpl extends CurrentWeatherRepository {
   @override
   Future<Either<Failure, WeatherEntity>> getUserLocationWeather(Geolocation location) async {
     try {
+      /// Getting main information about the weather for the specific location
       final weatherDetails = await currentWeatherRemoteDataSource.getCurrentPositionsWeather(location);
+      
+      /// Getting forecasts for few days
       final weatherForecasts = await currentWeatherRemoteDataSource.getForecastForDays(
         weatherDetails.geolocation.latitude,
         weatherDetails.geolocation.longtitude

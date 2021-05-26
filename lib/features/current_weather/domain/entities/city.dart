@@ -13,6 +13,7 @@ class City extends Equatable {
     this.conutryCode
   });
 
+  /// Default city instance
   static City empty = City(
     cityName: "--",
     conutryCode: "--",
