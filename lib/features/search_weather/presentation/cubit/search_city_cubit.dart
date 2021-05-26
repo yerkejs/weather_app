@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:weather_yerke/core/constants/constants.dart';
 import 'package:weather_yerke/core/helpers/usecase_base.dart';
 import 'package:weather_yerke/features/search_weather/domain/usecases/get_cities_from_cache.dart';
 import 'package:weather_yerke/features/search_weather/domain/usecases/save_city_in_cache.dart';
 
 part 'search_city_state.dart';
 
-const MAX_NUMBER_OF_CACHED_CITIES = 5;
 
 class SearchCityCubit extends Cubit<SearchCityState> {
   

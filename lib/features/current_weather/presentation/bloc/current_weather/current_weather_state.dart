@@ -27,7 +27,9 @@ class CurrentWeatherState extends Equatable {
   );
 
   static CurrentWeatherState emptyState = CurrentWeatherState(
-    weatherDetails: WeatherEntity(),
+    weatherDetails: WeatherEntity(
+      city: City.empty
+    ),
     status: CurrentWeatherLoadedStatus()
   );
 }

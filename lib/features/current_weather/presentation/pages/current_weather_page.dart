@@ -10,6 +10,7 @@ class CurrentWeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black87,
       body: SafeArea(
         child: BlocConsumer<UserLocationBloc, UserLocationState>(
           listener: (context, locationState) {
@@ -19,6 +20,10 @@ class CurrentWeatherPage extends StatelessWidget {
               context.read<UserLocationBloc>().add(GetUserLocation());
             } else if (locationState is LocationUseDenied) {
               context.read<UserLocationBloc>().add(LocationUseRequestPermission());
+            } else if (locationState is LocationUseFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Location error occured",)
+              ));
             }
           },
           builder: (context, locationState) {

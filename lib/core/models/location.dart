@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 class Geolocation extends Equatable {
-  final double latitude;
-  final double longtitude;
+  final num latitude;
+  final num longtitude;
 
   Geolocation({
     @required this.latitude,

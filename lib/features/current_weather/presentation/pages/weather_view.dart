@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_yerke/features/current_weather/presentation/bloc/current_weather/current_weather_cubit.dart';
+import 'package:weather_yerke/features/current_weather/presentation/pages/current_weather_page.dart';
+import 'package:weather_yerke/features/current_weather/presentation/widgets/city_dialog_view.dart';
+import 'package:weather_yerke/features/current_weather/presentation/widgets/weather_forecast_items.dart';
+import 'package:weather_yerke/features/current_weather/presentation/widgets/weather_header.dart';
 import 'package:weather_yerke/features/search_weather/presentation/search_weather_page.dart';
 
 class WeatherView extends StatelessWidget {
@@ -25,31 +29,43 @@ class WeatherView extends StatelessWidget {
         }
         
         return Container(
-          color: Colors.red,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16, vertical: 12
+          ),
+          height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => SearchWeatherPage()
-                  ));
-                }, 
-                child: Text("Change city")
+              WeatherHeader(
+                weather: state.weatherDetails,
+                onClickCityInfo: () {
+                  showDialog(
+                    context: context, 
+                    builder: (_) => CityDialogView(
+                      city: state.weatherDetails.city,
+                      onChangeCityClick: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SearchWeatherPage()
+                        ));
+                      },
+                      onSelectBoston: () {
+                        context.read<CurrentWeatherCubit>().getWeatherByCity("Boston");
+                      },
+                    )
+                  );
+                },
               ),
-              Text(state.weatherDetails?.temperature.toString() ?? ""),
-              Text(state.weatherDetails?.cityName ?? ""),
-              Text(state.weatherDetails?.condition?.description ?? ""),
+              const SizedBox(height: 12),
               Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: state.weatherDetails?.forecasts?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Text(
-                      state.weatherDetails.forecasts[index].humidity.toString()
-                    );
-                  }
-                ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16
+                  ),
+                  child: WeatherForecastItems(
+                    weatherEntity: state.weatherDetails,
+                  )
+                )
               )
             ],
           ),

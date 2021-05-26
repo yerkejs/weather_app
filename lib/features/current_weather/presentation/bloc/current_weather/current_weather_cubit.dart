@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_yerke/core/models/location.dart';
+import 'package:weather_yerke/features/current_weather/domain/entities/city.dart';
 import 'package:weather_yerke/features/current_weather/domain/entities/weather_entity.dart';
 import 'package:weather_yerke/features/current_weather/domain/usecases/getCityWeather.dart';
 import 'package:weather_yerke/features/current_weather/domain/usecases/getUserLocationWeather.dart';

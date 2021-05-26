@@ -2,14 +2,17 @@ import 'package:equatable/equatable.dart';
 import 'package:weather_yerke/core/models/location.dart';
 import 'package:weather_yerke/features/current_weather/domain/entities/weather_condition.dart';
 
+import 'city.dart';
+
 class WeatherEntity extends Equatable {
   final DateTime dateTime;
   final num temperature;
   final num feelsLikeTemperature;
   final num humidity;
   final num windSpeed;
+  final num pressure;
   final WeatherCondition condition;
-  final String cityName;
+  final City city;
   final List<WeatherEntity> forecasts;
   final Geolocation geolocation;
 
@@ -22,9 +25,10 @@ class WeatherEntity extends Equatable {
     this.humidity,
     this.windSpeed,
     this.condition,
-    this.cityName,
+    this.city,
     this.forecasts,
-    this.geolocation
+    this.geolocation,
+    this.pressure
   });
   
   // MARK: - Methods
@@ -35,8 +39,9 @@ class WeatherEntity extends Equatable {
     num feelsLikeTemperature,
     num humidity,
     num windSpeed,
+    num pressure,
     WeatherCondition condition,
-    String cityName,
+    City city,
     List<WeatherEntity> forecasts,
     Geolocation geolocation
   }) => WeatherEntity(
@@ -46,9 +51,10 @@ class WeatherEntity extends Equatable {
     humidity: humidity ?? this.humidity,
     windSpeed: windSpeed ?? this.windSpeed,
     condition: condition ?? this.condition,
-    cityName: cityName ?? this.cityName,
+    city: city ?? this.city,
     forecasts: forecasts ?? this.forecasts,
-    geolocation: geolocation ?? this.geolocation
+    geolocation: geolocation ?? this.geolocation,
+    pressure: pressure ?? this.pressure
   );
 
   @override
@@ -60,6 +66,8 @@ class WeatherEntity extends Equatable {
     windSpeed,
     condition,
     forecasts,
-    geolocation
+    geolocation,
+    pressure,
+    city
   ];
 }

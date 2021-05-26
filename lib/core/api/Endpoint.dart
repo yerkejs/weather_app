@@ -21,29 +21,31 @@ class WeatherEndpoints extends RequestEndpoint {
   
 
   factory WeatherEndpoints.getCurrentWeather ({
-    double latitude, 
-    double longitude 
+    num latitude, 
+    num longitude 
   }) {
     return WeatherEndpoints(
       path: EndpointConstants.pathBuilder(WeatherAPIServices.weather),
       queryParams: {
         "lat": '$latitude',
         "lon": '$longitude',
-        "appid": EndpointConstants.appID
+        "appid": EndpointConstants.appID,
+        "units": 'metric'
       }
     );
   }
 
   factory WeatherEndpoints.getForecastsForDays ({
-    double lat,
-    double lon 
+    num lat,
+    num lon 
   }) => WeatherEndpoints(
     path: EndpointConstants.pathBuilder(WeatherAPIServices.forecast),
     queryParams: {
       "appid": EndpointConstants.appID,
       "lat": lat.toString(),
       "lon": lon.toString(),
-      "exclude": "hourly,current,minutely,alerts"
+      "exclude": "hourly,current,minutely,alerts",
+      "units": 'metric'
     }
   );
  
@@ -54,6 +56,7 @@ class WeatherEndpoints extends RequestEndpoint {
     queryParams: {
       "appid": EndpointConstants.appID,
       "q": cityName,
+      "units": 'metric'
     }
   );
 

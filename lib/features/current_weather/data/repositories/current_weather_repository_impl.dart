@@ -35,12 +35,14 @@ class CurrentWeatherRepositoryImpl extends CurrentWeatherRepository {
       ));
     } on SocketException {
       return Left(NetworkErrorFailure());
-    } on HttpException {
-      return Left(RequestFailure());
     } on FormatException {
       return Left(FormatFailure());
-    } catch (_) {
-      return Left(FormatFailure());
+    } catch (error) {
+      if (error is Failure) {
+        return Left(error);
+      }
+
+      return Left(UndefinedFailure());
     }
   }
   
@@ -58,12 +60,14 @@ class CurrentWeatherRepositoryImpl extends CurrentWeatherRepository {
       ));
     } on SocketException {
       return Left(NetworkErrorFailure());
-    } on HttpException {
-      return Left(RequestFailure());
     } on FormatException {
       return Left(FormatFailure());
-    } catch (_) {
-      return Left(FormatFailure());
+    } catch (error) {
+      if (error is Failure) {
+        return Left(error);
+      }
+
+      return Left(UndefinedFailure());
     }
   }  
 }

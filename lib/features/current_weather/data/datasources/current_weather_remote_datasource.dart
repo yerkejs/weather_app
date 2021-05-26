@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:http/testing.dart';
 import 'package:weather_yerke/core/api/Endpoint.dart';
+import 'package:weather_yerke/core/exceptions/app_exceptions.dart';
 import 'package:weather_yerke/core/models/location.dart';
 import 'package:weather_yerke/features/current_weather/data/models/weather_model.dart';
 import 'package:http/http.dart' as http;
@@ -29,33 +31,47 @@ class CurrentWeatherRemoteDataSourceImpl extends CurrentWeatherRemoteDataSource 
 
   @override
   Future<WeatherEntity> getCurrentPositionsWeather(Geolocation location) async {
-    http.Response response = await http.get(WeatherEndpoints.getCurrentWeather(
-      latitude: location.latitude, 
-      longitude: location.longtitude
-    ).getURL());
+    http.Response response = await client.get(
+      WeatherEndpoints.getCurrentWeather(
+        latitude: location.latitude, 
+        longitude: location.longtitude
+      ).getURL(),
+    );
 
-    var json = jsonDecode(response.body);
-    return WeatherEntityModel.fromJson(json);
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      return WeatherEntityModel.fromJson(json);
+    } else {
+      throw RequestFailure();
+    }
   }
 
   @override
   Future<WeatherEntity> getCityWeather(String cityName) async {
-    http.Response response = await http.get(WeatherEndpoints.getCityWeather(
+    http.Response response = await client.get(WeatherEndpoints.getCityWeather(
       cityName: cityName 
     ).getURL());
 
-    var json = jsonDecode(response.body);
-    return WeatherEntityModel.fromJson(json);
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      return WeatherEntityModel.fromJson(json);
+    } else {
+      throw RequestFailure();
+    }
   }
 
   @override
   Future<List<WeatherEntity>> getForecastForDays(double lat, double lon) async {
-    http.Response response = await http.get(WeatherEndpoints.getForecastsForDays(
+    http.Response response = await client.get(WeatherEndpoints.getForecastsForDays(
       lat: lat,
       lon: lon
     ).getURL());
-
-    var json = jsonDecode(response.body);
-    return WeatherEntityModel.getWeatherForecasts(json);
+    
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      return WeatherEntityModel.getWeatherForecasts(json);
+    } else {
+      throw RequestFailure();
+    }
   }
 }

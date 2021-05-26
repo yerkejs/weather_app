@@ -1,6 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:weather_yerke/core/blocs/cubit/internet_connection_cubit.dart';
 import 'package:weather_yerke/features/current_weather/data/datasources/current_weather_remote_datasource.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_yerke/features/current_weather/domain/repositories/current_weather_repository.dart';
@@ -27,6 +28,12 @@ Future<void> init() async {
     () => CurrentWeatherCubit(
       getUserLocationWeather: sl(),
       getCityWeather: sl()
+    )
+  );
+
+  sl.registerFactory(
+    () => InternetConnectionCubit(
+      dataConnectionChecker: sl()
     )
   );
 

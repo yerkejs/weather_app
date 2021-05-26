@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+import 'package:weather_yerke/core/constants/constants.dart';
 import 'package:weather_yerke/core/exceptions/app_exceptions.dart';
 
 abstract class SearchCityDataSource {
   Future<void> cacheCitySearch(List<String> cities);
   Future<List<String>> getCachedCities ();
 }
-
-const String CITY_BOX_KEY = "CityBox";
 
 class SearchCityDataSourceImpl extends SearchCityDataSource {
   final HiveInterface hive;

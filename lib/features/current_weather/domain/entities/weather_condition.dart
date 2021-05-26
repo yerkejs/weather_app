@@ -7,6 +7,7 @@ class WeatherCondition extends Equatable {
   final String name;
   final String description;
   final String iconKey;
+  final String mainImagePath;
 
   Uri get iconUri => EndpointConstants.getConditionIcon(iconKey);
 
@@ -14,11 +15,12 @@ class WeatherCondition extends Equatable {
     @required this.id, 
     @required this.name, 
     @required this.description, 
-    @required this.iconKey
+    @required this.iconKey,
+    @required this.mainImagePath
   });
 
   @override
   List<Object> get props => [
-    id, name, description, iconKey
+    id, name, description, iconKey, mainImagePath
   ];
 }

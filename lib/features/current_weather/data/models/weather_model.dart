@@ -1,5 +1,6 @@
 import 'package:weather_yerke/core/models/location.dart';
 import 'package:weather_yerke/features/current_weather/data/models/weather_condition_model.dart';
+import 'package:weather_yerke/features/current_weather/domain/entities/city.dart';
 import 'package:weather_yerke/features/current_weather/domain/entities/weather_entity.dart';
 
 class WeatherEntityModel extends WeatherEntity {
@@ -12,8 +13,9 @@ class WeatherEntityModel extends WeatherEntity {
   final num humidity;
   final num windSpeed;
   final WeatherConditionModel conditionModel;
-  final String cityName;
+  final City city;
   final Geolocation geolocation;
+  final num pressure;
   
   // MARK: - Constructor
 
@@ -24,8 +26,9 @@ class WeatherEntityModel extends WeatherEntity {
     this.humidity,
     this.windSpeed,
     this.conditionModel,
-    this.cityName,
-    this.geolocation
+    this.city,
+    this.geolocation,
+    this.pressure
   }) : super(
     dateTime: dateTime,
     temperature: temperature,
@@ -33,8 +36,9 @@ class WeatherEntityModel extends WeatherEntity {
     humidity: humidity,
     windSpeed: windSpeed,
     condition: conditionModel,
-    cityName: cityName,
-    geolocation: geolocation
+    city: city,
+    geolocation: geolocation,
+    pressure: pressure
   );
 
   // MARK: - Factories
@@ -51,10 +55,18 @@ class WeatherEntityModel extends WeatherEntity {
       windSpeed: json["wind"]['speed'],
       conditionModel: weatherConditionsJson.length == 0 ? 
         null : WeatherConditionModel.fromJson(weatherConditionsJson[0]),
-      cityName: json['name'],
       geolocation: Geolocation(
         latitude: json["coord"]["lat"],
         longtitude: json['coord']['lon']
+      ),
+      pressure: json['main']['pressure'],
+      city: City(
+        cityName: json['name'],
+        sunrise: json['sys']["sunrise"] != null ? 
+          DateTime.fromMillisecondsSinceEpoch(json['sys']["sunrise"] * 1000) : null,
+        sunset: json['sys']["sunset"] != null ? 
+          DateTime.fromMillisecondsSinceEpoch(json['sys']["sunset"] * 1000) : null,
+        conutryCode: json['sys']['country']
       )
     );
   }
@@ -73,7 +85,8 @@ class WeatherEntityModel extends WeatherEntity {
           null : WeatherConditionModel.fromJson(weatherConditionsJson[0]),
         feelsLikeTemperature: item['feels_like']['day'],
         humidity: item['humidity'],
-        windSpeed: item['wind_speed']
+        windSpeed: item['wind_speed'],
+        pressure: item['pressure']
       ));
     }
 
